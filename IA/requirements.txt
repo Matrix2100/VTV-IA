@@ -1,3 +1,5 @@
 numpy
 pandas
 keras
+python-dotenv
+openai
