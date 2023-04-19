@@ -4,6 +4,7 @@ import os
 import speech_recognition as sr
 import whisper
 import torch
+import cProfile
 
 from datetime import datetime, timedelta
 from queue import Queue
@@ -14,12 +15,12 @@ from sys import platform
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", default="large", help="Model to use",
+    parser.add_argument("--model", default="small", help="Model to use",
                         choices=["tiny", "base", "small", "medium", "large"])
-    parser.add_argument("--language", default="pt", help="language to use",),
+    parser.add_argument("--language", default="Portuguese", help="language to use",),
     parser.add_argument("--non_english", action='store_true',
                         help="Don't use the english model.")
-    parser.add_argument("--energy_threshold", default=1000,
+    parser.add_argument("--energy_threshold", default=1600,
                         help="Energy level for mic to detect.", type=int)
     parser.add_argument("--record_timeout", default=3,
                         help="How real time the recording is in seconds.", type=float)
@@ -127,10 +128,11 @@ def main():
                 # Otherwise edit the existing one.
                 if phrase_complete:
                     print(text)
-                sleep(1)
+                sleep(0.2)
         except KeyboardInterrupt:
             break
 
 
 if __name__ == "__main__":
+
     main()
