@@ -3,3 +3,5 @@ pandas
 keras
 python-dotenv
 openai
+flask
+flask-limiter

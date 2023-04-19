@@ -1,0 +1,21 @@
+version: '3'
+services:
+  module-ia:
+    build: IA
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/IA
+  module-vtt:
+    build: VTT
+
+    ports:
+      - "5001:5001"
+    volumes:
+      - .:/VTT
+  module-ttv:
+    build: TTV
+    ports:
+      - "5002:5002"
+    volumes:
+      - .:/TTV
