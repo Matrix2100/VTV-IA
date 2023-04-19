@@ -8,7 +8,6 @@ services:
       - .:/IA
   module-vtt:
     build: VTT
-
     ports:
       - "5001:5001"
     volumes:
