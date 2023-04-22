@@ -1,16 +1,15 @@
-from flask import Flask, jsonify, request
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
+import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
-app = Flask(__name__)
-
-@app.get('/models')
-def models():
-    return jsonify(openai.Model.list()), 200
-
-
-@app.post('/chat/completions')
-
-if __name__ == '__main__':
-    app.run(port=5002)
+def send_message(message):
+    params = {'messages': {'role': 'user', 'content': message}}
+    headers = {}
+    response_data = requests.post(os.getenv("IA-URL")+"/chat/completions", params=params, headers=headers)
+    if response_data.status_code == 200:
+        return response_data.json()
+    else:
+        return response_data.status_code

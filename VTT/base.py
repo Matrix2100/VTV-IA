@@ -1,19 +1,19 @@
 import argparse
 import io
 import os
+from pathlib import Path
 import speech_recognition as sr
 import whisper
 import torch
 import cProfile
-
 from datetime import datetime, timedelta
 from queue import Queue
 from tempfile import NamedTemporaryFile
 from time import sleep
 from sys import platform
 import openai
-
 import time
+import api
 
 # recorder parameters
 energy_threshold = 1600
@@ -27,8 +27,9 @@ phrase_threshold = 0.3  # minimum seconds of speaking audio before we consider t
 non_speaking_duration = 0.5
 
 # whisper parameters
-model = "large"
+model = "large"  # options are "tiny", "base", "small", "medium", "large", "large"
 language = "Portuguese"
+download_root = Path.joinpath(Path(__file__).absolute().parent.parent, "VTT", "models")
 
 # microphone setting only for linux
 if 'linux' in platform:
@@ -85,15 +86,14 @@ def main():
     temp_file = NamedTemporaryFile().name
     print("Setup complete.")
 
-    print("Loading model...")
-    audio_model = whisper.load_model(model)
+    print("Loading/Downloading model from/to path " + download_root.__str__() + "...")
+    audio_model = whisper.load_model(model, download_root=download_root.__str__())
     print("Model loaded.")
     while True:
         try:
             now = datetime.utcnow()
             # Pull raw recorded audio from the queue.
             if not data_queue.empty():
-                t4 = time.time()
                 phrase_complete = False
                 # If enough time has passed between recordings, consider the phrase complete.
                 # Clear the current working audio buffer to start over with the new data.
@@ -111,19 +111,14 @@ def main():
                 # Use AudioData to convert the raw data to wav data.
                 audio_data = sr.AudioData(last_sample, source.SAMPLE_RATE, source.SAMPLE_WIDTH)
                 wav_data = io.BytesIO(audio_data.get_wav_data())
-                t5 = time.time()
-                print("Time to process audio: ", t5 - t4)
 
-                t6 = time.time()
                 # Write wav data to the temporary file as bytes.
                 with open(temp_file, 'w+b') as f:
                     f.write(wav_data.read())
-                t7 = time.time()
-                print("Time to write to file: ", t7 - t6)
 
                 # Read the transcription.
                 t8 = time.time()
-
+                torch.cuda.empty_cache()
                 result = audio_model.transcribe(temp_file, fp16=torch.cuda.is_available(), language=language)
                 text = result['text'].strip()
                 t9 = time.time()
@@ -132,7 +127,9 @@ def main():
                 # If we detected a pause between recordings, add a new item to our transcription.
                 # Otherwise, edit the existing one.
                 if phrase_complete:
-                    print(text)
+                    print("Sending through API: ", text)
+                    responseData = api.send_message(text)
+                    print("Response from API: ", responseData)
                 sleep(1)
         except KeyboardInterrupt:
             break
