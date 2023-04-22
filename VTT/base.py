@@ -11,34 +11,33 @@ from queue import Queue
 from tempfile import NamedTemporaryFile
 from time import sleep
 from sys import platform
+import openai
 
 import time
 
+# recorder parameters
+energy_threshold = 1600
+dynamic_energy_threshold = False
+record_timeout = 3
+phrase_timeout = 3
+dynamic_energy_adjustment_damping = 0.15
+dynamic_energy_ratio = 1.5
+pause_threshold = 0.8  # seconds of non-speaking audio before a phrase is considered complete
+phrase_threshold = 0.3  # minimum seconds of speaking audio before we consider the speaking audio a phrase - values below this are ignored (for filtering out clicks and pops)
+non_speaking_duration = 0.5
 
-def arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model", default="medium", help="Model to use",
-                        choices=["tiny", "base", "small", "medium", "large"])
-    parser.add_argument("--language", default="Portuguese", help="language to use", ),
-    parser.add_argument("--non_english", action='store_true',
-                        help="Don't use the english model.")
-    parser.add_argument("--energy_threshold", default=1600,
-                        help="Energy level for mic to detect.", type=int)
-    parser.add_argument("--record_timeout", default=3,
-                        help="How real time the recording is in seconds.", type=float)
-    parser.add_argument("--phrase_timeout", default=3,
-                        help="How much empty space between recordings before we "
-                             "consider it a new line in the transcription.", type=float)
+# whisper parameters
+model = "large"
+language = "Portuguese"
+
+# microphone setting only for linux
+if 'linux' in platform:
+    default_microphone = 'pulse'
+
+
+def microphone_source():
     if 'linux' in platform:
-        parser.add_argument("--default_microphone", default='pulse',
-                            help="Default microphone name for SpeechRecognition. "
-                                 "Run this with 'list' to view available Microphones.", type=str)
-    return parser.parse_args()
-
-
-def microphone_source(args):
-    if 'linux' in platform:
-        mic_name = args.default_microphone
+        mic_name = default_microphone
         if not mic_name or mic_name == 'list':
             print("Available microphone devices are: ")
             for index, name in enumerate(sr.Microphone.list_microphone_names()):
@@ -52,50 +51,43 @@ def microphone_source(args):
         return sr.Microphone(sample_rate=16000)
 
 
-def main():
-    # Parse command line arguments.
-    t0 = time.time()
-    args = arguments()
-    # The last time a recording was retrieved from the queue.
-    phrase_time = None
-    # Current raw audio bytes.
-    last_sample = bytes()
-    # Thread safe Queue for passing data from the threaded recording callback.
-    data_queue = Queue()
-    # We use SpeechRecognizer to record our audio because it has a nice feature where it can detect when speech ends.
+def get_recorder(source):
     recorder = sr.Recognizer()
-    recorder.energy_threshold = args.energy_threshold
-    # Definitely do this, dynamic energy compensation lowers the energy threshold dramatically to a point where the
-    # SpeechRecognizer never stops recording.
-    recorder.dynamic_energy_threshold = True
-    transcription = ''
-    # Important for linux users.
-    # Prevents permanent application hang and crash by using the wrong Microphone
-    source = microphone_source(args)
-    record_timeout = args.record_timeout
-    phrase_timeout = args.phrase_timeout
-    temp_file = NamedTemporaryFile().name
+    recorder.dynamic_energy_threshold = dynamic_energy_threshold
+    recorder.energy_threshold = energy_threshold
+    recorder.dynamic_energy_adjustment_damping = dynamic_energy_adjustment_damping
+    recorder.dynamic_energy_ratio = dynamic_energy_ratio
+    recorder.pause_threshold = pause_threshold
+    recorder.phrase_threshold = phrase_threshold
+    recorder.non_speaking_duration = non_speaking_duration
     with source:
         recorder.adjust_for_ambient_noise(source)
+    return recorder
+
+
+def main():
+    print("Starting to setup microphone, recorder and queue...")
+    source = microphone_source()
+    recorder = get_recorder(source)
+    data_queue = Queue()
 
     def record_callback(_, audio: sr.AudioData) -> None:
         """
-        Threaded callback function to recieve audio data when recordings finish.
+        Threaded callback function to receive audio data when recordings finish.
         audio: An AudioData containing the recorded bytes.
         """
         # Grab the raw bytes and push it into the thread safe queue.
         data_queue.put(audio.get_raw_data())
-
-    # Create a background thread that will pass us raw audio bytes.
-    # We could do this manually but SpeechRecognizer provides a nice helper.
     recorder.listen_in_background(source, record_callback, phrase_time_limit=record_timeout)
-    t1 = time.time()
-    print("Time to setup configuration: ", t1 - t0)
 
-    t2 = time.time()
-    audio_model = whisper.load_model(args.model)
-    t3 = time.time()
-    print("Time to load/download model: ", t3 - t2)
+    phrase_time = None
+    last_sample = bytes()
+    temp_file = NamedTemporaryFile().name
+    print("Setup complete.")
+
+    print("Loading model...")
+    audio_model = whisper.load_model(model)
+    print("Model loaded.")
     while True:
         try:
             now = datetime.utcnow()
@@ -131,7 +123,8 @@ def main():
 
                 # Read the transcription.
                 t8 = time.time()
-                result = audio_model.transcribe(temp_file, fp16=torch.cuda.is_available(), language=args.language)
+
+                result = audio_model.transcribe(temp_file, fp16=torch.cuda.is_available(), language=language)
                 text = result['text'].strip()
                 t9 = time.time()
                 print("Time to transcribe: ", t9 - t8)
