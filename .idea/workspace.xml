@@ -33,6 +33,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -40,7 +41,6 @@
   <component name="ProjectId" id="2OcRTYvUu6IT0QdtlItDHMpQt7K" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
@@ -49,13 +49,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "development",
-    "last_opened_file_path": "G:/Pessoal/VTV-IA/VTT",
+    "last_opened_file_path": "G:/Projetos/Pessoal/VTV-IA/venv2/Scripts/python.exe",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -67,10 +67,14 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Pessoal\VTV-IA\VTT" />
+      <recent name="G:\Pessoal\VTV-IA\VTT\types" />
+      <recent name="G:\Pessoal\VTV-IA\VTT\model\vosk-model-pt-fb-v0.1.1-20220516_2113" />
+      <recent name="G:\Pessoal\VTV-IA\VTT\model\model-pt\vosk-model-pt-fb-v0.1.1-20220516_2113" />
+      <recent name="G:\Pessoal\VTV-IA\VTT\model" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.app (1)">
-    <configuration name="app (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.api">
+    <configuration name="api" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VTV-IA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -78,12 +82,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/VTT" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/IA" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VTT/app.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/IA/api.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -100,12 +104,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/IA" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/VTT" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/IA/app.py" />
+      <option name="SCRIPT_NAME" value="G:\Pessoal\VTV-IA\VTT\app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -114,7 +118,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="setup" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="base" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VTV-IA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -127,7 +131,29 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VTT/setup.py" />
+      <option name="SCRIPT_NAME" value="G:\Projetos\Pessoal\VTV-IA\VTT\base.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="whisper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="VTV-IA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/VTT" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="G:\Pessoal\VTV-IA\VTT\whisper.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -143,43 +169,16 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.module-ia: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="module-ia" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.module-vtt: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="envFilePath" value="" />
-          <option name="services">
-            <list>
-              <option value="module-vtt" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
+      <deployment type="dockerfile">
+        <settings />
       </deployment>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.app (1)" />
-        <item itemvalue="Docker.docker-compose.yml.module-vtt: Compose Deployment" />
-        <item itemvalue="Python.setup" />
+        <item itemvalue="Python.api" />
+        <item itemvalue="Python.base" />
         <item itemvalue="Python.app" />
-        <item itemvalue="Docker.docker-compose.yml.module-ia: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -194,6 +193,12 @@
       <workItem from="1681857896501" duration="7811000" />
       <workItem from="1681905249799" duration="2048000" />
       <workItem from="1681907316904" duration="12961000" />
+      <workItem from="1682011725639" duration="16318000" />
+      <workItem from="1682088138388" duration="627000" />
+      <workItem from="1682103190979" duration="223000" />
+      <workItem from="1682103424409" duration="3797000" />
+      <workItem from="1682107524396" duration="4532000" />
+      <workItem from="1682112243614" duration="3323000" />
     </task>
     <task id="LOCAL-00001" summary="testando flask">
       <created>1681870097976</created>
@@ -228,8 +233,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="openai whisper working but still need adjustments" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/VTV_IA$whisper.coverage" NAME="app Coverage Results" MODIFIED="1682111113357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT" />
+    <SUITE FILE_PATH="coverage/VTV_IA$type3.coverage" NAME="type3 Coverage Results" MODIFIED="1682039246300" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT" />
+    <SUITE FILE_PATH="coverage/VTV_IA$whisper__1_.coverage" NAME="whisper (1) Coverage Results" MODIFIED="1682109720347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT" />
     <SUITE FILE_PATH="coverage/VTV_IA$app.coverage" NAME="app Coverage Results" MODIFIED="1681907103742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/IA" />
+    <SUITE FILE_PATH="coverage/VTV_IA$type2.coverage" NAME="type2 Coverage Results" MODIFIED="1682039198706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT" />
+    <SUITE FILE_PATH="coverage/VTV_IA$type3__1_.coverage" NAME="type3 (1) Coverage Results" MODIFIED="1682104113923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT/types" />
     <SUITE FILE_PATH="coverage/VTV_IA$setup.coverage" NAME="setup Coverage Results" MODIFIED="1681913608202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT" />
-    <SUITE FILE_PATH="coverage/VTV_IA$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1681928421404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT" />
+    <SUITE FILE_PATH="coverage/VTV_IA$type1__1_.coverage" NAME="type1 (1) Coverage Results" MODIFIED="1682107248199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT" />
+    <SUITE FILE_PATH="coverage/VTV_IA$api.coverage" NAME="api Coverage Results" MODIFIED="1682114458244" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/IA" />
+    <SUITE FILE_PATH="coverage/VTV_IA$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1682107289351" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/VTT" />
   </component>
 </project>
